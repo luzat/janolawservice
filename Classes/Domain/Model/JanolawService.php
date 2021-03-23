@@ -26,6 +26,7 @@ namespace Janolaw\Janolawservice\Domain\Model;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use TYPO3\CMS\Extbase\Annotation\Validate;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 /**
@@ -38,7 +39,7 @@ class JanolawService extends AbstractEntity
      * type
      *
      * @var string
-     * @validate NotEmpty
+     * @Validate("NotEmpty")
      */
     protected $type = 0;
 
@@ -46,7 +47,7 @@ class JanolawService extends AbstractEntity
      * shopid
      *
      * @var int
-     * @validate NotEmpty
+     * @Validate("NotEmpty")
      */
     protected $shopid = null;
 
@@ -54,7 +55,7 @@ class JanolawService extends AbstractEntity
      * userid
      *
      * @var int
-     * @validate NotEmpty
+     * @Validate("NotEmpty")
      */
     protected $userid = null;
 
@@ -64,7 +65,7 @@ class JanolawService extends AbstractEntity
      * @var string
      */
     protected $content = '';
-    
+
     /**
      * legacyLanguage
      *
@@ -88,7 +89,7 @@ class JanolawService extends AbstractEntity
     {
         return $this->content;
     }
-    
+
     /**
      * Sets the content
      *
@@ -109,7 +110,7 @@ class JanolawService extends AbstractEntity
     {
         return $this->type;
     }
-    
+
     /**
      * Sets the type
      *
@@ -120,7 +121,7 @@ class JanolawService extends AbstractEntity
     {
         $this->type = $type;
     }
-    
+
     /**
      * Returns the userid
      *
@@ -130,7 +131,7 @@ class JanolawService extends AbstractEntity
     {
         return $this->userid;
     }
-    
+
     /**
      * Sets the userid
      *
