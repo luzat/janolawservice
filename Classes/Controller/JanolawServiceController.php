@@ -4,6 +4,7 @@ namespace Janolaw\Janolawservice\Controller;
 
 use Janolaw\Janolawservice\Domain\Repository\JanolawServiceRepository;
 use Janolaw\Janolawservice\Utility\JanolawConfigurationUtility;
+use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
@@ -48,11 +49,23 @@ class JanolawServiceController extends ActionController
      */
     protected $janolawServiceRepository = null;
     /**
+     * janolawConfigurationUtility
+     *
+     * @var JanolawConfigurationUtility
+     */
+    protected $janolawConfigurationUtility;
+    /**
      * cacheUtility
      *
      * @var \TYPO3\CMS\Core\Cache\CacheManager
      */
     protected $cacheInstance;
+    /**
+     * extensionConfiguration
+     *
+     * @var ExtensionConfiguration
+     */
+    protected $extensionConfiguration;
 
     /**
      * @param JanolawServiceRepository $janolawServiceRepository
@@ -62,6 +75,26 @@ class JanolawServiceController extends ActionController
     )
     {
         $this->janolawServiceRepository = $janolawServiceRepository;
+    }
+
+    /**
+     * @param JanolawConfigurationUtility $janolawConfigurationUtility
+     */
+    public function injectJanolawConfigurationUtility(
+      JanolawConfigurationUtility $janolawConfigurationUtility
+    )
+    {
+      $this->janolawConfigurationUtility = $janolawConfigurationUtility;
+    }
+
+  /**
+   * @param ExtensionConfiguration $extensionConfiguration
+     */
+    public function injectExtensionConfiguration(
+         ExtensionConfiguration $extensionConfiguration
+    )
+    {
+        $this->extensionConfiguration = $extensionConfiguration;
     }
 
     public function initializeAction()
@@ -119,9 +152,7 @@ class JanolawServiceController extends ActionController
     )
     {
         $debugMessage = "";
-        $_extConfig = unserialize(
-            $GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['janolawservice']
-        );
+        $_extConfig = $this->extensionConfiguration->get('janolawservice');
         $lifetime = $_extConfig['lifetimeHours'] * 3600;
         if ( !isset( $userid ) || $userid <= 0 )
         {
@@ -140,7 +171,7 @@ class JanolawServiceController extends ActionController
 
         if ( $content === false )
         {
-            $configUtil = new JanolawConfigurationUtility();
+            $configUtil = $this->janolawConfigurationUtility;
 
             $validUserData = $configUtil->hasValidUserData( $userid, $shopid );
             $validVersion = $configUtil->janolaw_get_version( $userid, $shopid, $debugMessage );
