@@ -3,6 +3,7 @@
 namespace Janolaw\Janolawservice\Utility;
 
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
+use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -274,7 +275,7 @@ class JanolawConfigurationUtility
             $pdfPath = 'typo3temp/janolaw/'.$shopid."/";
             if ( !is_dir( $pdfPath ) )
             {
-                GeneralUtility::mkdir_deep( PATH_site, $pdfPath );
+                GeneralUtility::mkdir_deep( Environment::getPublicPath() . '/' . $pdfPath );
             }
             $pdfsuccess = GeneralUtility::writeFile(
                 $pdfPath . $pdfName,
