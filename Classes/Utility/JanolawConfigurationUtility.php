@@ -12,23 +12,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 class JanolawConfigurationUtility
 {
     /**
-     * extensionConfiguration
-     *
-     * @var ExtensionConfiguration
-     */
-    protected $extensionConfiguration;
-
-    /**
-     * @param ExtensionConfiguration $extensionConfiguration
-     */
-    public function injectExtensionConfiguration(
-      ExtensionConfiguration $extensionConfiguration
-    )
-    {
-      $this->extensionConfiguration = $extensionConfiguration;
-    }
-
-    /**
      * Checks the backend configuration and shows a message if necessary.
      * The method returns an array or the HTML code depends on
      * $params['propertyName'] is set or not.
@@ -38,7 +21,8 @@ class JanolawConfigurationUtility
 
     public function checkUserData()
     {
-        $_extConfig = $this->extensionConfiguration->get('janolawservice');
+    	$extensionConfiguration = GeneralUtility::makeInstance(ExtensionConfiguration::class);
+        $_extConfig = $extensionConfiguration->get('janolawservice');
         $userid = $_extConfig['user_id'];
         $shopid = $_extConfig['shop_id'];
 
@@ -184,7 +168,8 @@ class JanolawConfigurationUtility
 
     public function checkVersion(  )
     {
-        $_extConfig = $this->extensionConfiguration->get('janolawservice');
+		$extensionConfiguration = GeneralUtility::makeInstance(ExtensionConfiguration::class);
+		$_extConfig = $extensionConfiguration->get('janolawservice');
         $userid = $_extConfig['user_id'];
         $shopid = $_extConfig['shop_id'];
         $version = 0;
