@@ -22,7 +22,6 @@ return array(
 		'iconfile' => 'EXT:janolawservice/Resources/Public/Icons/tx_janolawservice_domain_model_janolawservice.gif'
 	),
 	'interface' => array(
-		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, type, userid, shopid, content, legacy_language, pdf',
 	),
 	'types' => array(
 		'1' => array('showitem' => 'sys_language_uid,l10n_parent,l10n_diffsource,hidden,--palette--;;1,type,userid,shopid,content,legacy_language, pdf,--div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access,starttime,endtime'),
@@ -47,7 +46,6 @@ return array(
 		),
 		'l10n_parent' => array(
 			'displayCond' => 'FIELD:sys_language_uid:>:0',
-			'exclude' => 1,
 			'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.l18n_parent',
 			'config' => array(
 				'type' => 'select',
